@@ -15,9 +15,9 @@ export const submitLead = createServerFn({ method: "POST" })
     const { data: row, error } = await supabaseAdmin
       .from("leads")
       .insert({
-        ...(clean as never),
+        ...clean,
         source: data.utm_source ? `website:${data.utm_source}` : "website",
-      })
+      } as never)
       .select()
       .single();
     if (error || !row) {
