@@ -11,10 +11,10 @@ import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 
 const search = z.object({
-  q: z.string().catch(""),
-  status: z.string().catch(""),
-  line: z.string().catch(""),
-  page: z.number().int().min(1).catch(1),
+  q: z.string().optional().catch(undefined),
+  status: z.string().optional().catch(undefined),
+  line: z.string().optional().catch(undefined),
+  page: z.number().int().min(1).optional().catch(undefined),
 });
 
 export const Route = createFileRoute("/_authenticated/admin/")({
@@ -25,7 +25,8 @@ export const Route = createFileRoute("/_authenticated/admin/")({
 const sel = "h-9 rounded-md border border-input bg-card px-3 text-sm";
 
 function Leads() {
-  const f = Route.useSearch();
+  const raw = Route.useSearch();
+  const f = { q: raw.q ?? "", status: raw.status ?? "", line: raw.line ?? "", page: raw.page ?? 1 };
   const nav = useNavigate({ from: "/admin/" });
   const [q, setQ] = useState(f.q);
   const [exporting, setExporting] = useState(false);

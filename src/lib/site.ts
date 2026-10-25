@@ -14,7 +14,7 @@ export const SITE = {
     "Building No 282 C, Flower's Business Zone Building, Perumbilavu, Thrissur, Kerala, India 680519",
   moversCities: ["Thrissur", "Bangalore", "Mangalore", "Chennai", "Hyderabad"],
   social: "almaluxe",
-};
+} as const;
 
 export const tel = (p: string) => `tel:${p.replace(/\s/g, "")}`;
 
