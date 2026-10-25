@@ -1,0 +1,1 @@
+var e=`/assets/products-CK1JknzJ.jpg`;export{e as t};

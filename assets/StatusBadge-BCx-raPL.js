@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-BkSabwWG.js";var t=e();function n({status:e}){return(0,t.jsx)(`span`,{className:`rounded px-2 py-0.5 text-xs font-semibold capitalize ${e===`new`?`bg-primary text-primary-foreground`:e===`won`?`bg-success text-background`:e===`lost`?`bg-destructive text-destructive-foreground`:`bg-accent text-primary`}`,children:e})}export{n as t};
