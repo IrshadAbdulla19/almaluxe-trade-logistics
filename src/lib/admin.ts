@@ -22,7 +22,7 @@ export async function fetchLeads(f: LeadFilters) {
   return { rows: data, total: count ?? 0 };
 }
 
-const COLS: (keyof Lead)[] = ["created_at", "name", "phone", "email", "company", "country", "business_line", "interest",
+const COLS: (keyof Lead)[] = ["created_at", "name", "phone", "email", "pickup_location", "destination", "moving_date", "property_type", "required_services", "interest",
   "message", "status", "follow_up_date", "source", "form", "utm_source", "utm_medium", "utm_campaign"];
 
 export async function exportLeadsCsv(f: LeadFilters) {

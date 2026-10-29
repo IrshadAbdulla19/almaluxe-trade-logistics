@@ -1,19 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { pageHead } from "@/lib/metadata";
 import { Textarea } from "@/components/ui/textarea";
 
-export const Route = createFileRoute("/_authenticated/admin/catalog")({ component: Catalog });
+export const Route = createFileRoute("/_authenticated/admin/catalog")({ head: () => pageHead("Manage Moving Services", "Secure moving service management for Almaluxe Packers and Movers."), component: Catalog });
 
-type Table = "products" | "services";
 
 function Catalog() {
-  const [tab, setTab] = useState<Table>("products");
+  const tab = "services";
   const qc = useQueryClient();
   const list = useQuery({
     queryKey: ["admin-catalog", tab],
@@ -34,13 +33,9 @@ function Catalog() {
 
   return (
     <div>
-      <h1 className="text-5xl">Catalog</h1>
-      <div className="mt-4 flex gap-2">
-        {(["products", "services"] as const).map((t) => (
-          <Button key={t} variant={tab === t ? "default" : "outline"} size="sm" onClick={() => setTab(t)} className="capitalize">{t}</Button>
-        ))}
-      </div>
+      <h1 className="text-5xl">Moving Services</h1>
       {list.isLoading && <Loader2 className="mt-6 animate-spin text-primary" />}
+      {list.error && <p role="alert" className="mt-6 text-destructive">Could not load services.</p>}
       <div className="mt-6 space-y-4">
         {list.data?.map((r) => (
           <form key={r.id} className="space-y-2 rounded-lg border border-border bg-card p-4"
