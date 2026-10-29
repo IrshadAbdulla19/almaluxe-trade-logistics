@@ -1,4 +1,4 @@
-export function Logo({ sub = "Export LLP" }: { sub?: string }) {
+export function Logo({ sub = "Packers and Movers" }: { sub?: string }) {
   return (
     <span className="flex flex-col leading-none">
       <span className="font-display text-3xl tracking-wide text-foreground">

@@ -8,9 +8,10 @@ import { LEAD_STATUSES } from "@/lib/leads.schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { pageHead } from "@/lib/metadata";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 
-export const Route = createFileRoute("/_authenticated/admin/leads/$id")({ component: LeadDetail });
+export const Route = createFileRoute("/_authenticated/admin/leads/$id")({ head: () => pageHead("Enquiry Details", "Secure moving enquiry details, statuses and follow-up notes."), component: LeadDetail });
 
 function LeadDetail() {
   const { id } = Route.useParams();
@@ -67,8 +68,9 @@ function LeadDetail() {
   if (!l) return <p>Lead not found. <Link to="/admin" className="text-primary">Back</Link></p>;
 
   const rows: [string, string | null][] = [
-    ["Phone", l.phone], ["Email", l.email], ["Company", l.company], ["Country / City", l.country],
-    ["Business", l.business_line], ["Product / Service", l.interest], ["Form", l.form], ["Source", l.source],
+    ["Phone", l.phone], ["Email", l.email], ["Pickup location", l.pickup_location ?? l.country], ["Destination", l.destination],
+    ["Moving date", l.moving_date], ["Property type", l.property_type],
+    ["Required services", l.required_services?.join(", ") ?? l.interest], ["Form", l.form], ["Source", l.source],
     ["UTM source", l.utm_source], ["UTM medium", l.utm_medium], ["UTM campaign", l.utm_campaign],
     ["Received", new Date(l.created_at).toLocaleString()], ["Updated", new Date(l.updated_at).toLocaleString()],
     ["Synced to Sheets", l.sheets_synced_at ? new Date(l.sheets_synced_at).toLocaleString() : "Not synced"],

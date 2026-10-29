@@ -49,8 +49,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Almaluxe Export LLP & Packers and Movers" },
-      { name: "description", content: "Food exports from India and packers & movers services from Thrissur, Kerala." },
+      { title: "Almaluxe Packers and Movers" },
+      { name: "description", content: "Household and office relocation from Thrissur, Kerala." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

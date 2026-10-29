@@ -17,6 +17,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PackersMoversRouteImport } from './routes/packers-movers'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QuoteRouteImport } from './routes/quote'
+import { Route as ServiceAreasRouteImport } from './routes/service-areas'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
@@ -63,6 +64,11 @@ const QuoteRoute = QuoteRouteImport.update({
   path: '/quote',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServiceAreasRoute = ServiceAreasRouteImport.update({
+  id: '/service-areas',
+  path: '/service-areas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/packers-movers': typeof PackersMoversRoute
   '/privacy': typeof PrivacyRoute
   '/quote': typeof QuoteRoute
+  '/service-areas': typeof ServiceAreasRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/products/$slug': typeof ProductsSlugRoute
   '/products/': typeof ProductsIndexRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/packers-movers': typeof PackersMoversRoute
   '/privacy': typeof PrivacyRoute
   '/quote': typeof QuoteRoute
+  '/service-areas': typeof ServiceAreasRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/products': typeof ProductsIndexRoute
   '/admin/catalog': typeof AuthenticatedAdminCatalogRoute
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/packers-movers': typeof PackersMoversRoute
   '/privacy': typeof PrivacyRoute
   '/quote': typeof QuoteRoute
+  '/service-areas': typeof ServiceAreasRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/products/$slug': typeof ProductsSlugRoute
   '/products/': typeof ProductsIndexRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/packers-movers'
     | '/privacy'
     | '/quote'
+    | '/service-areas'
     | '/admin'
     | '/products/$slug'
     | '/products/'
@@ -167,6 +177,7 @@ export interface FileRouteTypes {
     | '/packers-movers'
     | '/privacy'
     | '/quote'
+    | '/service-areas'
     | '/products/$slug'
     | '/products'
     | '/admin/catalog'
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
     | '/packers-movers'
     | '/privacy'
     | '/quote'
+    | '/service-areas'
     | '/_authenticated/admin'
     | '/products/$slug'
     | '/products/'
@@ -199,6 +211,7 @@ export interface RootRouteChildren {
   PackersMoversRoute: typeof PackersMoversRoute
   PrivacyRoute: typeof PrivacyRoute
   QuoteRoute: typeof QuoteRoute
+  ServiceAreasRoute: typeof ServiceAreasRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       path: '/quote'
       fullPath: '/quote'
       preLoaderRoute: typeof QuoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service-areas': {
+      id: '/service-areas'
+      path: '/service-areas'
+      fullPath: '/service-areas'
+      preLoaderRoute: typeof ServiceAreasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -341,6 +361,7 @@ const rootRouteChildren: RootRouteChildren = {
   PackersMoversRoute: PackersMoversRoute,
   PrivacyRoute: PrivacyRoute,
   QuoteRoute: QuoteRoute,
+  ServiceAreasRoute: ServiceAreasRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   ProductsIndexRoute: ProductsIndexRoute,
 }

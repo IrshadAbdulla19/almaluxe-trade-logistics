@@ -61,6 +61,7 @@
   --paper-foreground: oklch(0.16 0 0);
   --success: oklch(0.72 0.17 150);
   --gradient-gold: linear-gradient(135deg, oklch(0.88 0.17 92), oklch(0.76 0.16 75));
+  --gradient-moving-overlay: linear-gradient(90deg, oklch(0.14 0 0 / 0.97) 0%, oklch(0.14 0 0 / 0.85) 35%, oklch(0.14 0 0 / 0.1) 80%);
   --gradient-fade: linear-gradient(180deg, oklch(0.14 0 0 / 0.2), oklch(0.14 0 0 / 0.95));
   --shadow-gold: 0 12px 40px -12px oklch(0.84 0.17 88 / 0.45);
 }
@@ -73,7 +74,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
-  h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: 0.02em; }
+  h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: 0; }
 }
 
 @utility bg-gold { background-image: var(--gradient-gold); }
@@ -88,4 +89,14 @@
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: none; }
+}
+
+@utility bg-moving-overlay { background-image: var(--gradient-moving-overlay); }
+.home-hero { height: min(740px, calc(100svh - 155px)); min-height: 510px; }
+@media (max-width: 640px) {
+  .home-hero { height: auto; min-height: 550px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 0s !important; }
 }

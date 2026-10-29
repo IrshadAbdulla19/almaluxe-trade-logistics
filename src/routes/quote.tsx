@@ -1,16 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
+import { pageHead } from "@/lib/metadata";
 import { LeadForm } from "@/components/site/LeadForm";
 
 export const Route = createFileRoute("/quote")({
-  head: () => ({
-    meta: [
-      { title: "Request a Quote | Almaluxe" },
-      { name: "description", content: "Request a quote for food exports or packers and movers services." },
-      { property: "og:title", content: "Request a Quote — Almaluxe" },
-      { property: "og:description", content: "Tell us what you need and our team will get back to you." },
-    ],
-  }),
+  head: () => pageHead("Request a Quote", "Request a moving quotation from Almaluxe Packers and Movers. Share your pickup, destination, moving date and packing requirements."),
   component: Quote,
 });
 
@@ -18,10 +12,10 @@ function Quote() {
   return (
     <>
       <PageHero eyebrow="Request a quote" title="Tell us what you need">
-        Choose export products or packers & movers, share your requirements, and we'll get back to you.
+        Share your locations, moving date and requirements with our moving team.
       </PageHero>
       <section className="mx-auto max-w-3xl px-4 py-16">
-        <LeadForm form="quote" showCountry />
+        <LeadForm form="quote" />
       </section>
     </>
   );

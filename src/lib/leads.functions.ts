@@ -10,12 +10,13 @@ export const submitLead = createServerFn({ method: "POST" })
     const { website: _hp, ...rest } = data;
     const clean = Object.fromEntries(
       Object.entries(rest).map(([k, v]) => [k, v === "" ? null : v]),
-    ) as Record<string, string | null>;
+    ) as Record<string, unknown>;
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: row, error } = await supabaseAdmin
       .from("leads")
       .insert({
         ...clean,
+        business_line: "movers",
         source: data.utm_source ? `website:${data.utm_source}` : "website",
       } as never)
       .select()

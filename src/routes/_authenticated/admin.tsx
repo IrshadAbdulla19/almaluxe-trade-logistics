@@ -36,7 +36,7 @@ function AdminLayout() {
           <Link to="/admin"><Logo sub="Admin" /></Link>
           <nav className="flex items-center gap-1 text-sm">
             <Link to="/admin" activeOptions={{ exact: true }} className="flex items-center gap-1 rounded px-3 py-2 hover:bg-muted" activeProps={{ className: "text-primary" }}><Users className="h-4 w-4" /> Leads</Link>
-            <Link to="/admin/catalog" className="flex items-center gap-1 rounded px-3 py-2 hover:bg-muted" activeProps={{ className: "text-primary" }}><Package className="h-4 w-4" /> Catalog</Link>
+            <Link to="/admin/catalog" className="flex items-center gap-1 rounded px-3 py-2 hover:bg-muted" activeProps={{ className: "text-primary" }}><Package className="h-4 w-4" /> Services</Link>
             <Button variant="ghost" size="sm" onClick={signOut}><LogOut className="h-4 w-4" /><span className="hidden sm:inline">Sign out</span></Button>
           </nav>
         </div>

@@ -5,10 +5,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { pageHead } from "@/lib/metadata";
 import { Logo } from "@/components/site/Logo";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Admin Sign In | Almaluxe" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [...pageHead("Admin Sign In", "Secure staff sign-in for Almaluxe Packers and Movers.").meta, { name: "robots", content: "noindex" }] }),
   component: AuthPage,
 });
 

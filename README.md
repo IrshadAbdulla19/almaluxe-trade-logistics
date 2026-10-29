@@ -1,97 +1,49 @@
-# Almaluxe Trade & Logistics
+# Almaluxe Packers and Movers
 
-Build a complete, professional, responsive full-stack MERN website for Almaluxe Export LLP and Almaluxe Packers and Movers.
+The existing website is now exclusively for household and office relocation. Black, gold/yellow and white branding is retained. Existing lead records and optional integrations are preserved.
 
-I am a Flutter developer learning the MERN stack. Build the full application first, then make the code easy for me to understand and modify.
+## Pages
+- `/`: moving home page
+- `/about`: company and head office
+- `/packers-movers`: Moving Services (existing URL retained)
+- `/service-areas`: Thrissur, Bangalore, Mangalore, Chennai and Hyderabad
+- `/quote`: structured moving quotation
+- `/contact`: clickable business contacts, map and quotation form
+- `/privacy`: enquiry privacy policy; legal review recommended
+- `/auth`: staff sign-in
+- `/admin`: moving enquiries, search, statuses, pagination and CSV download
+- `/admin/leads/$id`: moving details, source tracking, follow-up date and internal notes
+- `/admin/catalog`: moving service editing (existing URL retained)
 
-TECH STACK:
+Retired catalogue URLs redirect permanently to Moving Services; historical records are not deleted.
 
-React + Vite + JavaScript
+## Architecture
+The live app uses React, TypeScript, Vite, Tailwind v4 and TanStack Start, with Lovable Cloud database and authentication. It is not an Express/MongoDB runtime. Routes live in `src/routes`, shared public components in `src/components/site`, and lead validation/server submission in `src/lib/leads.schema.ts` and `src/lib/leads.functions.ts`. Server functions are typed same-origin calls rather than separate REST endpoints. The shared schema validates customer name, phone, optional email, pickup, destination, moving date, property type, required services and additional details on both client and server.
 
-Node.js + Express.js
+Existing `leads` stores enquiries and UTM attribution, statuses and follow-up dates. Additive nullable moving columns preserve compatibility with historical leads. `lead_notes` stores internal follow-up notes; `services` stores editable moving services. `user_roles` separately stores permissions. Database policies restrict enquiry reads/updates to administrators; anonymous submissions are saved server-side. Retired records remain stored but are not rendered publicly.
 
-MongoDB + Mongoose
-
-Tailwind CSS
-
-REST APIs
-
-Secure admin authentication
-
-DESIGN:
-Use the supplied reference images to create a premium black, gold/yellow, and white brand identity. Use modern typography, high-quality relevant images, polished layouts, subtle animations, and responsive mobile-first design.
-
-PUBLIC PAGES:
-
-Home
-
-About Us
-
-Export Products
-
-Product Details
-
-Packers and Movers
-
-Contact Us
-
-Request a Quote
-
-Privacy Policy
-
-EXPORT CATEGORIES:
-Vegetables, fruits, meat, fish and seafood, spices, pulses, eggs, and nuts.
-
-ADMIN DASHBOARD:
-
-Secure login
-
-Lead listing, search, filtering, and pagination
-
-Lead detail pages
-
-Status updates and internal notes
-
-Follow-up dates
-
-Product and service management
-
-CSV export
-
-LEAD MANAGEMENT:
-Save website enquiries in MongoDB. Record customer details, business category, product or service, source, campaign attribution when available, message, status, and timestamps.
-
-Prepare separate integrations for Google Sheets synchronization, WhatsApp Business Platform notifications, Facebook Lead Ads, and Instagram Lead Ads.
-
-Do not fake integrations or expose private credentials. Document the credentials, permissions, and setup needed to activate them.
-
-QUALITY:
-Implement real navigation, validated forms, loading and error states, secure backend access, and responsive layouts. Do not invent company details, certifications, prices, or testimonials.
-
-DELIVERY:
-Build the complete application, run it, test the major workflows, fix errors, and provide deployment instructions.
-
-Create a README explaining the architecture, installation, environment variables, API endpoints, database models, and how to edit common website features.
-
-Use my supplied reference images, make sensible design decisions, and ask only for essential missing business information. Start building now and continue until the available environment's limits are reached. Clearly identify anything unfinished or untested.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/cca89bf7-a26c-410f-882c-1e51bf142111).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
+## Local development
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install
+bun run dev
+bun run test
 ```
+Use the generated public `VITE_SUPABASE_*` configuration for the browser. Server-side database configuration and optional integration credentials are managed by Lovable Cloud; never put private values in browser code or source control. Outside this hosted environment, provide server credentials securely and apply the existing schema before testing server functions.
+
+## Common edits
+- Business contacts: `src/lib/site.ts`
+- Theme tokens: `src/styles.css`
+- Header and footer: `src/components/site`
+- Page copy and page metadata: the corresponding `src/routes` file
+- Quote fields and validation: shared lead schema, form and additive database columns
+- Public service descriptions: signed-in admin Services page
+
+## Integrations and configuration
+Google Sheets and WhatsApp notification helpers are retained in `src/lib/integrations.server.ts`; a failure never blocks saving the enquiry. Sheets requires the existing connector credentials, `LEADS_SPREADSHEET_ID` and a `Leads` worksheet. WhatsApp requires the existing connector credentials, `WHATSAPP_NOTIFY_TO` and an approved `WHATSAPP_LEAD_TEMPLATE`. The 12-column Sheets layout is preserved; moving services appear under interest, and a readable moving summary is included in the message. These helpers are not proof that a connector is configured or delivering. Facebook/Instagram webhook ingestion has not been implemented.
+
+No owner email notification is configured. Enquiries are stored in Cloud → Database → leads and shown in the secured admin area. Owner emails require a paid plan and a verified owned domain; verification alone does not activate notification code.
+
+There are currently no registered auth users, so admin end-to-end verification requires the owner account. The existing first-account signup behavior assigns the first registered account as administrator. Complete owner setup before publishing; later accounts are not administrators. Hosted signup/email settings must be checked before relying on account creation.
+
+## Deployment and checks
+Run the project tests and verify public pages, quotation storage and authorised admin changes. Publish using Lovable's publishing flow when ready; the app has not been published as part of this update. Connect a custom domain separately if desired. Review the privacy policy and confirm service availability before launch. Generated imagery is illustrative, not a photo of the company's own staff or vehicles.
