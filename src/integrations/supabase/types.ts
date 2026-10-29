@@ -52,6 +52,7 @@ export type Database = {
           company: string | null
           country: string | null
           created_at: string
+          destination: string | null
           email: string | null
           external_id: string | null
           follow_up_date: string | null
@@ -59,8 +60,12 @@ export type Database = {
           id: string
           interest: string | null
           message: string | null
+          moving_date: string | null
           name: string
           phone: string
+          pickup_location: string | null
+          property_type: string | null
+          required_services: string[] | null
           sheets_synced_at: string | null
           source: string
           status: string
@@ -76,6 +81,7 @@ export type Database = {
           company?: string | null
           country?: string | null
           created_at?: string
+          destination?: string | null
           email?: string | null
           external_id?: string | null
           follow_up_date?: string | null
@@ -83,8 +89,12 @@ export type Database = {
           id?: string
           interest?: string | null
           message?: string | null
+          moving_date?: string | null
           name: string
           phone: string
+          pickup_location?: string | null
+          property_type?: string | null
+          required_services?: string[] | null
           sheets_synced_at?: string | null
           source?: string
           status?: string
@@ -100,6 +110,7 @@ export type Database = {
           company?: string | null
           country?: string | null
           created_at?: string
+          destination?: string | null
           email?: string | null
           external_id?: string | null
           follow_up_date?: string | null
@@ -107,8 +118,12 @@ export type Database = {
           id?: string
           interest?: string | null
           message?: string | null
+          moving_date?: string | null
           name?: string
           phone?: string
+          pickup_location?: string | null
+          property_type?: string | null
+          required_services?: string[] | null
           sheets_synced_at?: string | null
           source?: string
           status?: string

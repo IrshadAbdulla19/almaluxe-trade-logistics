@@ -1,0 +1,2 @@
+ALTER TABLE public.leads ADD COLUMN pickup_location text, ADD COLUMN destination text, ADD COLUMN moving_date date, ADD COLUMN property_type text, ADD COLUMN required_services text[];
+COMMENT ON TABLE public.products IS 'DEPRECATED: public catalogue retired; historical records retained.';
