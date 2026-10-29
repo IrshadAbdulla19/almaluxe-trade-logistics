@@ -5,17 +5,11 @@ import { PageHero } from "@/components/site/PageHero";
 import { LeadForm } from "@/components/site/LeadForm";
 import { servicesQuery } from "@/lib/catalog.functions";
 import { SITE, tel } from "@/lib/site";
+import { pageHead } from "@/lib/metadata";
 import movers from "@/assets/movers.jpg";
 
 export const Route = createFileRoute("/packers-movers")({
-  head: () => ({
-    meta: [
-      { title: "Packers and Movers Thrissur | Almaluxe Packers and Movers" },
-      { name: "description", content: "Home shifting, office relocation and door-to-door moving from Thrissur. Serving Bangalore, Mangalore, Chennai and Hyderabad." },
-      { property: "og:title", content: "Almaluxe Packers and Movers — Thrissur" },
-      { property: "og:description", content: "We pack with care, we move with trust." },
-    ],
-  }),
+  head: () => pageHead("Moving Services", "Home shifting, office relocation, vehicle transport, packing and loading services from Thrissur, Kerala."),
   loader: ({ context }) => context.queryClient.ensureQueryData(servicesQuery),
   component: Movers,
 });
@@ -29,7 +23,7 @@ function Movers() {
   const { data: services } = useSuspenseQuery(servicesQuery);
   return (
     <>
-      <PageHero eyebrow={SITE.moversName} title="Packers & Movers Thrissur" image={movers}>{SITE.moversTagline}.</PageHero>
+      <PageHero eyebrow={SITE.moversName} title="Moving services" image={movers}>{SITE.moversTagline}.</PageHero>
       <section className="mx-auto max-w-7xl px-4 py-16">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {FEATURES.map(([I, t]) => (
@@ -63,7 +57,7 @@ function Movers() {
             <li><a href={`mailto:${SITE.moversEmail}`} className="flex items-center gap-2 break-all hover:text-primary"><Mail className="h-5 w-5 shrink-0 text-primary" />{SITE.moversEmail}</a></li>
           </ul>
         </div>
-        <LeadForm form="movers" businessLine="movers" showCountry interestOptions={services.map((s) => s.name)} />
+        <LeadForm form="movers" interestOptions={services.map((s) => s.name)} />
       </section>
     </>
   );

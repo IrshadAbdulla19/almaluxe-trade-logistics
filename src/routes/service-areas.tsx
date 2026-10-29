@@ -1,0 +1,8 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { MapPin, ArrowUpRight } from "lucide-react";
+import { PageHero } from "@/components/site/PageHero";
+import { Button } from "@/components/ui/button";
+import { SITE } from "@/lib/site";
+import { pageHead } from "@/lib/metadata";
+export const Route = createFileRoute("/service-areas")({ head: () => pageHead("Service Areas", "Moving services from Thrissur serving Thrissur, Bangalore, Mangalore, Chennai and Hyderabad. Ask Almaluxe about your planned route."), component: Areas });
+function Areas() { return <><PageHero eyebrow="Our moving network" title="Service areas">From our base in Thrissur to your next address.</PageHero><section className="mx-auto max-w-7xl px-4 py-16"><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{SITE.moversCities.map((city, i) => <div key={city} className="rounded-lg border border-border bg-card p-6"><MapPin className="h-7 w-7 text-primary" /><h2 className="mt-4 text-3xl">{city}</h2><p className="mt-2 text-sm text-muted-foreground">{i === 0 ? "Our home base in Kerala. Household and office moving enquiries welcome." : `Moving enquiries between Thrissur and ${city}.`}</p></div>)}</div><div className="mt-12 border-t border-border pt-8"><h2 className="text-3xl">Tell us your route</h2><p className="mt-3 max-w-xl text-muted-foreground">Share your pickup and destination locations, preferred date and required services. Our team will confirm availability and discuss your move.</p><Button asChild className="mt-6"><Link to="/quote">Request a Quote <ArrowUpRight /></Link></Button></div></section></>; }
