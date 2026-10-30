@@ -57,7 +57,7 @@ export function LeadForm({ form, interestOptions }: Props) {
       </div>
       <fieldset className="space-y-3"><legend className="text-sm font-medium">Required services *</legend>
         <div className="grid gap-3 sm:grid-cols-2">{options.map((s) => <label key={s} className="flex items-start gap-2 text-sm"><input type="checkbox" name="required_services" value={s} className="mt-1 accent-primary" />{s}</label>)}</div>
-        {errors.required_services && <p className="text-sm text-destructive">{errors.required_services}</p>}
+        {errors["required_services"] && <p className="text-sm text-destructive">{errors["required_services"]}</p>}
       </fieldset>
       {field("message", "Additional details", <Textarea {...attrs("message")} rows={4} maxLength={2000} />)}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
