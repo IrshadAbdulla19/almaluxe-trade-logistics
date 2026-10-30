@@ -95,6 +95,7 @@
 .home-hero { height: min(740px, calc(100svh - 155px)); min-height: 510px; }
 @media (max-width: 640px) {
   .home-hero { height: auto; min-height: 550px; }
+  .bg-moving-overlay { background-image: linear-gradient(90deg, oklch(0.14 0 0 / 0.95), oklch(0.14 0 0 / 0.68)); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -1,6 +1,6 @@
 export function Logo({ sub = "Packers and Movers" }: { sub?: string }) {
   return (
-    <span className="flex flex-col leading-none">
+    <span className="flex w-fit flex-col leading-none">
       <span className="font-display text-3xl tracking-wide text-foreground">
         ALMALUX<span className="text-primary">E</span>
       </span>

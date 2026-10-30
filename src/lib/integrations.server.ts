@@ -5,11 +5,21 @@ type Lead = {
   id: string; name: string; email: string | null; phone: string; company: string | null;
   country: string | null; business_line: string; interest: string | null; message: string | null;
   source: string; utm_campaign: string | null; created_at: string;
+  pickup_location?: string | null; destination?: string | null; moving_date?: string | null;
+  property_type?: string | null; required_services?: string[] | null;
 };
 
 const GATEWAY = "https://connector-gateway.lovable.dev";
 
 export async function syncLeadToSheets(lead: Lead): Promise<boolean> {
+  const movingSummary = [
+    lead.pickup_location && `Pickup: ${lead.pickup_location}`,
+    lead.destination && `Destination: ${lead.destination}`,
+    lead.moving_date && `Moving date: ${lead.moving_date}`,
+    lead.property_type && `Property: ${lead.property_type}`,
+    lead.required_services?.length && `Services: ${lead.required_services.join(", ")}`,
+    lead.message,
+  ].filter(Boolean).join("\n");
   const lovableKey = process.env["LOVABLE_API_KEY"];
   const sheetsKey = process.env["GOOGLE_SHEETS_API_KEY"];
   const sheetId = process.env["LEADS_SPREADSHEET_ID"];
@@ -25,7 +35,7 @@ export async function syncLeadToSheets(lead: Lead): Promise<boolean> {
       },
       body: JSON.stringify({
         values: [[lead.created_at, lead.id, lead.name, lead.phone, lead.email ?? "", lead.company ?? "",
-          lead.country ?? "", lead.business_line, lead.interest ?? "", lead.message ?? "", lead.source, lead.utm_campaign ?? ""]],
+          lead.country ?? "", lead.business_line, lead.interest ?? "", movingSummary, lead.source, lead.utm_campaign ?? ""]],
       }),
     },
   );
